@@ -55,38 +55,3 @@ export function createGallery(images) {
   if (simpleLightbox && typeof simpleLightbox.refresh === 'function')
     simpleLightbox.refresh();
 }
-
-export function appendGallery(images) {
-  if (!Array.isArray(images) || !galleryEl) return;
-
-  const markup = images
-    .map(img => {
-      const {
-        largeImageURL = '#',
-        webformatURL = '',
-        tags = '',
-        likes = 0,
-        views = 0,
-        comments = 0,
-        downloads = 0,
-      } = img || {};
-
-      return `
-      <li class="gallery-item">
-        <a class="gallery-link js-gallery-link" href="${largeImageURL}">
-          <img class="gallery-image" src="${webformatURL}" alt="${tags}" loading="lazy" />
-        </a>
-        <div class="info">
-          <p class="info-item"><span>Likes:</span> ${likes}</p>
-          <p class="info-item"><span>Views:</span> ${views}</p>
-          <p class="info-item"><span>Comments:</span> ${comments}</p>
-          <p class="info-item"><span>Downloads:</span> ${downloads}</p>
-        </div>
-      </li>`;
-    })
-    .join('');
-
-  galleryEl.insertAdjacentHTML('beforeend', markup);
-  if (simpleLightbox && typeof simpleLightbox.refresh === 'function')
-    simpleLightbox.refresh();
-}
