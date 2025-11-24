@@ -24,7 +24,7 @@ export function onSearchFormSubmit(event) {
   const query = ((input && input.value) || '').trim();
 
   if (!query) {
-    iziToast.warning({ message: 'Поле не должно быть пустым' });
+    iziToast.warning({ message: 'The input must not be empty' });
     return;
   }
 
@@ -32,10 +32,12 @@ export function onSearchFormSubmit(event) {
 
   getImagesByQuery(query)
     .then(function (data) {
-      // data should be an object with hits array
       if (!data || !Array.isArray(data.hits) || data.hits.length === 0) {
         clearGallery();
-        iziToast.info({ message: 'По вашему запросу ничего не найдено.' });
+        iziToast.info({
+          message:
+            'Sorry, there are no images matching your search query. Please try again!',
+        });
         return;
       }
 
@@ -43,11 +45,13 @@ export function onSearchFormSubmit(event) {
     })
     .catch(function (err) {
       clearGallery();
-      iziToast.error({ message: 'Произошла ошибка при загрузке результатов.' });
+      iziToast.error({
+        message:
+          'Sorry, there are no images matching your search query. Please try again!',
+      });
       console.error(err);
     })
     .finally(function () {
       hideLoader();
     });
 }
-
