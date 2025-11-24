@@ -37,6 +37,8 @@ export function onSearchFormSubmit(event) {
         iziToast.info({
           message:
             'Sorry, there are no images matching your search query. Please try again!',
+          color: 'red',
+          position: 'topRight',
         });
         return;
       }
@@ -48,6 +50,8 @@ export function onSearchFormSubmit(event) {
       iziToast.error({
         message:
           'Sorry, there are no images matching your search query. Please try again!',
+        color: 'red',
+        position: 'topRight',
       });
       console.error(err);
     })
